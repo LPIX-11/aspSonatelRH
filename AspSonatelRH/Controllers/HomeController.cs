@@ -10,8 +10,10 @@ namespace AspSonatelRH.Controllers
 {
     public class HomeController : Controller
     {
+        RHDbContext db = new RHDbContext();
         public IActionResult Index()
         {
+            // var list = db.Candidat.Select(x => x.NomCandidat).ToList();
             return View();
         }
 
