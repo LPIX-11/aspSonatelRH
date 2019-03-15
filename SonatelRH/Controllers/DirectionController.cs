@@ -52,16 +52,17 @@ namespace SonatelRH.Controllers
         }
 
         // PUT: methode to update direction
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateDirection(long id, [FromBody] Direction direction)
+        [HttpPut("{idDirection}")]
+        public async Task<IActionResult> UpdateDirection(long idDirection, [FromBody] Direction direction)
         {
-            if (id != direction.IdDirection)
+            //it is necessary to have the direction for know what we apply the update
+            if (idDirection != direction.IdDirection)
             {
-                return BadRequest();
+                return BadRequest(); // this direction don't correspond a direction in  the database 
             }
 
             rhContext.Entry(direction).State = EntityState.Modified;
-            await rhContext.SaveChangesAsync();
+            await rhContext.SaveChangesAsync(); //Save the change of the same direction in the database
 
             return NoContent();
         }
