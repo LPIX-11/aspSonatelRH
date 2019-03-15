@@ -14,7 +14,7 @@ namespace SonatelRH.Controllers
     public class DirectionController : Controller
     {
         // Declaring rh database context on private and read only
-        private readonly RHDbContext rhContext = new RHDbContext();
+        private RHDbContext rhContext = new RHDbContext();
 
         // GET: api/<controller>. Gets all directions and attributes from database via an asynchronous action
         [HttpGet]
@@ -25,7 +25,7 @@ namespace SonatelRH.Controllers
         }
 
         // GET direction by id
-        [HttpGet("{id}")]
+        [HttpGet("{idDirection}")]
         public async Task<ActionResult<Direction>> GetDirectionByIdAsync(int idDirection)
         {
 

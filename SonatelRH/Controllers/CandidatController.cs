@@ -15,7 +15,7 @@ namespace SonatelRH.Controllers
     public class CandidatController : Controller
     {
         // Declaring rh database context on private and read only
-        private readonly RHDbContext rhContext = new RHDbContext();
+        private RHDbContext rhContext = new RHDbContext();
 
         // GET: api/<controller>. Gets all candidates and attributes from database via an asynchronous action
         [HttpGet]
@@ -26,7 +26,7 @@ namespace SonatelRH.Controllers
         }
 
         // GET: api/<controller>/5. Gets the specified indexed candidate
-        [HttpGet("{id}")]
+        [HttpGet("{idCandidat}")]
         public async Task<ActionResult<Candidat>> GetCandidateAsync(int idCandidat)
         {
 
@@ -53,20 +53,40 @@ namespace SonatelRH.Controllers
             return CreatedAtAction(nameof(GetCandidateAsync), new { id = candidat.IdCandidat }, candidat); // return the created action
         }
 
-       /* // PUT api/<controller>/5
-        [HttpPut("{id}")]
-        public void PutCandidate(int id, [FromBody]string value)
+        // PUT api/<controller>/5
+        [HttpPut("{idCandidate}")]
+        public async Task<IActionResult> PutCandidate(int idCandidate, [FromBody]Candidat candidat)
         {
-        }*/
+            if(idCandidate != candidat.IdCandidat)
+            {
+                return BadRequest();
+            }
+
+            rhContext.Entry(candidat).State = EntityState.Modified;
+            await rhContext.SaveChangesAsync();
+
+            return NoContent();
+        }
 
         /*
          * Commenting out the delete method, think it's not necessary for now 15/03/2019
          */
 
         /*// DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{idCandidat}")]
+        public async Task<IActionResult> DeleteTodoItem(int idCandidat)
         {
+            var candidat = await _context.Candidat.FindAsync(idCandidat);
+
+            if (candidat == null)
+            {
+                return NotFound();
+            }
+
+            _context.TodoItems.Remove(candidat);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }*/
     }
 }
