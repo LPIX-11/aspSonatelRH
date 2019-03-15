@@ -50,5 +50,20 @@ namespace SonatelRH.Controllers
 
             return CreatedAtAction(nameof(GetDirectionByIdAsync), new { id = direction.IdDirection }, direction); // return the created action
         }
+
+        // PUT: methode to update direction
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateDirection(long id, [FromBody] Direction direction)
+        {
+            if (id != direction.IdDirection)
+            {
+                return BadRequest();
+            }
+
+            rhContext.Entry(direction).State = EntityState.Modified;
+            await rhContext.SaveChangesAsync();
+
+            return NoContent();
+        }
     }
 }
