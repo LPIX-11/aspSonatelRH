@@ -45,6 +45,10 @@ namespace SonatelRH.Models
                     .HasColumnName("idCandidat")
                     .HasColumnType("int(11)");
 
+                entity.Property(e => e.DateNaissance)
+                    .HasColumnName("dateNaissance")
+                    .HasColumnType("date");
+
                 entity.Property(e => e.DatePriseFonction)
                     .HasColumnName("datePriseFonction")
                     .HasColumnType("date");

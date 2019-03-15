@@ -14,8 +14,8 @@ namespace SonatelRH.Models
         public string IntitulePoste { get; set; }
         public string SitePoste { get; set; }
         public string CompetenceRequise { get; set; }
-        public DateTime PremierCommission { get; set; }
-        public DateTime DeuxiemeCommission { get; set; }
+        public DateTime? PremierCommission { get; set; }
+        public DateTime? DeuxiemeCommission { get; set; }
         public int IdDirection { get; set; }
         public int IdTypeRecrutement { get; set; }
 
